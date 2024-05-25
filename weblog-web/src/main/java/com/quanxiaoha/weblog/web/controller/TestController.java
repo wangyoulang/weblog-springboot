@@ -1,5 +1,6 @@
 package com.quanxiaoha.weblog.web.controller;
 
+import com.quanxiaoha.weblog.common.utils.Response;
 import com.quanxiaoha.weblog.web.model.User;
 import com.quanxiaoha.weblog.common.aspect.ApiOperationLog;
 import lombok.extern.slf4j.Slf4j;
@@ -32,6 +33,16 @@ public class TestController {
             return ResponseEntity.badRequest().body(errorMsg);
         }
         return ResponseEntity.ok("参数没有任何问题");
+    }
+
+    @PostMapping("/test1")
+    @ApiOperationLog
+    public Response test1(@RequestBody @Valid User user, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            String errorMsg = bindingResult.getFieldErrors().stream().map(FieldError::getDefaultMessage).collect(Collectors.joining(", "));
+            return Response.fail(errorMsg);
+        }
+        return Response.success();
     }
 
 }
