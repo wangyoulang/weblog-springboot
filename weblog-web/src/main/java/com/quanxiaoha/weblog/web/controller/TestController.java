@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class TestController {
 
     @PostMapping("/test")
-//    @ApiOperationLog(description = "测试接口")
+    @ApiOperationLog(description = "测试接口")
     public User test(@RequestBody User user) {
         // 返参
         return user;
