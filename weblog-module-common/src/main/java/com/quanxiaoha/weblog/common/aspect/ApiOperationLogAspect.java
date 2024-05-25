@@ -6,10 +6,12 @@ import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.aspectj.lang.reflect.MethodSignature;
+import org.slf4j.MDC;
 import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Method;
 import java.util.Arrays;
+import java.util.UUID;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -30,38 +32,43 @@ public class ApiOperationLogAspect {
      */
     @Around("apiOperationLog()")
     public Object doAround(ProceedingJoinPoint joinPoint) throws Throwable {
-        // 请求开始时间
-        long startTime = System.currentTimeMillis();
+        try {
+            MDC.put("traceId", UUID.randomUUID().toString());
+            // 请求开始时间
+            long startTime = System.currentTimeMillis();
 
-        // 获取被请求的类和方法
-        String className = joinPoint.getTarget().getClass().getSimpleName();
-        String methodName = joinPoint.getSignature().getName();
+            // 获取被请求的类和方法
+            String className = joinPoint.getTarget().getClass().getSimpleName();
+            String methodName = joinPoint.getSignature().getName();
 
-        // 请求入参
-        Object[] args = joinPoint.getArgs();
-        String argsJsonStr = Arrays.stream(args).map(toJsonStr()).collect(Collectors.joining(", "));
+            // 请求入参
+            Object[] args = joinPoint.getArgs();
+            String argsJsonStr = Arrays.stream(args).map(toJsonStr()).collect(Collectors.joining(", "));
 
-        // 功能描述信息
-        String description = getApiOperationLogDescription(joinPoint);
+            // 功能描述信息
+            String description = getApiOperationLogDescription(joinPoint);
 
-        // 打印请求相关参数
-        log.info("====== 请求开始: [{}], 入参: {}, 请求类: {}, 请求方法: {} =================================== ",
-                description, argsJsonStr, className, methodName);
+            // 打印请求相关参数
+            log.info("====== 请求开始: [{}], 入参: {}, 请求类: {}, 请求方法: {} =================================== ",
+                    description, argsJsonStr, className, methodName);
 
-        // 执行切点方法
-        Object result = joinPoint.proceed();
+            // 执行切点方法
+            Object result = joinPoint.proceed();
 
-        // 执行耗时
-        long executionTime = System.currentTimeMillis() - startTime;
+            // 执行耗时
+            long executionTime = System.currentTimeMillis() - startTime;
 
-        // 出参
-        String resultJsonStr = new ObjectMapper().writeValueAsString(result);
+            // 出参
+            String resultJsonStr = new ObjectMapper().writeValueAsString(result);
 
-        // 打印出参等相关信息
-        log.info("====== 请求结束: [{}], 耗时: {}ms, 出参: {} =================================== ",
-                description, executionTime, resultJsonStr);
+            // 打印出参等相关信息
+            log.info("====== 请求结束: [{}], 耗时: {}ms, 出参: {} =================================== ",
+                    description, executionTime, resultJsonStr);
 
-        return result;
+            return result;
+        } finally {
+            MDC.clear();
+        }
     }
 
     /**
