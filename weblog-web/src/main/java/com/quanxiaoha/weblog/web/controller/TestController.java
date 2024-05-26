@@ -1,5 +1,7 @@
 package com.quanxiaoha.weblog.web.controller;
 
+import com.quanxiaoha.weblog.common.enums.ResponseCodeEnum;
+import com.quanxiaoha.weblog.common.exception.BizException;
 import com.quanxiaoha.weblog.common.utils.Response;
 import com.quanxiaoha.weblog.web.model.User;
 import com.quanxiaoha.weblog.common.aspect.ApiOperationLog;
@@ -43,6 +45,12 @@ public class TestController {
             return Response.fail(errorMsg);
         }
         return Response.success();
+    }
+
+    @PostMapping("/test2")
+    @ApiOperationLog
+    public Response test2(@RequestBody @Valid User user, BindingResult bindingResult) {
+        throw new BizException(ResponseCodeEnum.PRODUCT_NOT_FOUND.getErrorCode(), ResponseCodeEnum.PRODUCT_NOT_FOUND.getErrorMessage());
     }
 
 }
