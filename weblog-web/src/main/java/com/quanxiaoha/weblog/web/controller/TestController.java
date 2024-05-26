@@ -50,7 +50,8 @@ public class TestController {
     @PostMapping("/test2")
     @ApiOperationLog
     public Response test2(@RequestBody @Valid User user, BindingResult bindingResult) {
-        throw new BizException(ResponseCodeEnum.PRODUCT_NOT_FOUND.getErrorCode(), ResponseCodeEnum.PRODUCT_NOT_FOUND.getErrorMessage());
+//        throw new BizException(ResponseCodeEnum.PRODUCT_NOT_FOUND.getErrorCode(), ResponseCodeEnum.PRODUCT_NOT_FOUND.getErrorMessage());
+        throw new BizException(ResponseCodeEnum.PRODUCT_NOT_FOUND);
     }
 
 }

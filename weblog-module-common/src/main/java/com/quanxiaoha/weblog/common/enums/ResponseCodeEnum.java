@@ -1,11 +1,12 @@
 package com.quanxiaoha.weblog.common.enums;
 
+import com.quanxiaoha.weblog.common.exception.BaseExceptionInterface;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public enum ResponseCodeEnum {
+public enum ResponseCodeEnum implements BaseExceptionInterface {
     // ================通用异常状态码=================
     SYSTEM_ERROR("10000", "出错了，后台小哥正在努力修复……"),
 
