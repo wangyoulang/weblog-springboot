@@ -37,13 +37,20 @@ public class TestController {
         return ResponseEntity.ok("参数没有任何问题");
     }
 
+    /**
+     * postman入参：
+     * {
+     *     "username": "",
+     *     "sex": null,
+     *     "age": 120,
+     *     "email": "123124"
+     * }
+     * @param user
+     * @return
+     */
     @PostMapping("/test1")
     @ApiOperationLog
-    public Response test1(@RequestBody @Valid User user, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            String errorMsg = bindingResult.getFieldErrors().stream().map(FieldError::getDefaultMessage).collect(Collectors.joining(", "));
-            return Response.fail(errorMsg);
-        }
+    public Response test1(@RequestBody @Valid User user) {
         return Response.success();
     }
 
