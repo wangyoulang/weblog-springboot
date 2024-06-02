@@ -1,6 +1,7 @@
 package com.quanxiaoha.weblog.web.controller;
 
 import com.quanxiaoha.weblog.common.enums.ResponseCodeEnum;
+import com.quanxiaoha.weblog.common.utils.JsonUtil;
 import com.quanxiaoha.weblog.common.exception.BizException;
 import com.quanxiaoha.weblog.common.utils.Response;
 import com.quanxiaoha.weblog.web.model.User;
@@ -16,6 +17,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.stream.Collectors;
 
 /**
@@ -53,18 +57,35 @@ public class TestController {
      * @return
      */
     @PostMapping("/test1")
-    @ApiOperationLog
+    @ApiOperationLog(description = "测试接口")
     @ApiOperation(value = "测试接口-全局异常处理器：参数校验")
     public Response test1(@RequestBody @Valid User user) {
-        return Response.success();
+        log.info(JsonUtil.toJsonString(user));
+        // 设置三种日期字段值
+        user.setCreateTime(LocalDateTime.now());
+        user.setUpdateDate(LocalDate.now());
+        user.setTime(LocalTime.now());
+        return Response.success(user);
     }
 
     @PostMapping("/test2")
-    @ApiOperationLog
+    @ApiOperationLog(description = "测试接口")
     @ApiOperation(value = "全局异常处理器")
     public Response test2(@RequestBody @Valid User user, BindingResult bindingResult) {
 //        throw new BizException(ResponseCodeEnum.PRODUCT_NOT_FOUND.getErrorCode(), ResponseCodeEnum.PRODUCT_NOT_FOUND.getErrorMessage());
         throw new BizException(ResponseCodeEnum.PRODUCT_NOT_FOUND);
+    }
+
+    @PostMapping("/test3")
+    @ApiOperationLog(description = "测试接口")
+    @ApiOperation(value = "序列化和反序列化")
+    public Response testjackson(@RequestBody @Valid User user) {
+        // 设置三种日期字段值
+        user.setCreateTime(LocalDateTime.now());
+        user.setUpdateDate(LocalDate.now());
+        user.setTime(LocalTime.now());
+
+        return Response.success(user);
     }
 
 }
