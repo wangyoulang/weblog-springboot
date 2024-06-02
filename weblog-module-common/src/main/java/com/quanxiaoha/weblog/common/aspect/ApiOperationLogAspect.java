@@ -2,6 +2,7 @@
 package com.quanxiaoha.weblog.common.aspect;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.quanxiaoha.weblog.common.utils.JsonUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
@@ -58,12 +59,9 @@ public class ApiOperationLogAspect {
             // 执行耗时
             long executionTime = System.currentTimeMillis() - startTime;
 
-            // 出参
-            String resultJsonStr = new ObjectMapper().writeValueAsString(result);
-
             // 打印出参等相关信息
             log.info("====== 请求结束: [{}], 耗时: {}ms, 出参: {} =================================== ",
-                    description, executionTime, resultJsonStr);
+                    description, executionTime, JsonUtil.toJsonString(result));
 
             return result;
         } finally {
@@ -95,13 +93,7 @@ public class ApiOperationLogAspect {
      * @return
      */
     private Function<Object, String> toJsonStr() {
-        return arg -> {
-            try {
-                return new ObjectMapper().writeValueAsString(arg);
-            } catch (JsonProcessingException e) {
-                return arg.toString();
-            }
-        };
+        return arg -> JsonUtil.toJsonString(arg);
     }
 
 }
