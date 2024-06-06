@@ -63,3 +63,13 @@ npm install flowbite
 
 使用flowbite：https://flowbite.com/docs/components/accordion/
 
+## 整合 Element Plus
+安装
+```sh
+npm install element-plus --save
+```
+
+安装unplugin-vue-components 和 unplugin-auto-import
+```sh
+npm install -D unplugin-vue-components unplugin-auto-import
+```
