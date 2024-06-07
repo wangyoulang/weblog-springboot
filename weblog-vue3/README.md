@@ -79,3 +79,19 @@ npm install @element-plus/icons-vue
 ```
 图片哪里有现成的？
  https://www.iconfont.cn/
+
+ ## 使用Animate.css动态库
+ Animate.css 是一个跨浏览器的 CSS 动画库，提供了许多预设的、流畅的动画效果。用户只需添加几个 CSS 类名，就可以轻松实现复杂的动画效果，无需编写任何 JavaScript 代码。
+
+ ### 安装Animate
+ ```sh
+ npm install animate.css --save
+ ```
+ 然后再main.js里面引入它
+ ```sh
+ import 'animate.css';
+ ```
+ 在Animate官网挑选合适的动画效果
+ https://animate.style/
+
+ 

@@ -1,6 +1,7 @@
 // 导入 Element Plus 图标
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 import '@/assets/main.css'
+import 'animate.css';
 
 import { createApp } from 'vue'
 import App from '@/App.vue'
