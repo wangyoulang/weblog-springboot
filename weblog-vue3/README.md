@@ -73,3 +73,9 @@ npm install element-plus --save
 ```sh
 npm install -D unplugin-vue-components unplugin-auto-import
 ```
+### Element Plus 图标库安装
+```sh
+npm install @element-plus/icons-vue
+```
+图片哪里有现成的？
+ https://www.iconfont.cn/
