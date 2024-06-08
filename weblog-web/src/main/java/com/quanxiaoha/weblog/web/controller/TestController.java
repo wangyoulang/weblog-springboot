@@ -33,7 +33,7 @@ import java.util.stream.Collectors;
 @Api(tags = "首页模块")
 public class TestController {
 
-    @PostMapping("/test")
+    @PostMapping("admin/test")
     @ApiOperationLog(description = "测试接口")
     @ApiOperation(value = "测试接口OK")
     public ResponseEntity<String> test(@RequestBody @Valid User user, BindingResult bindingResult) {
@@ -56,7 +56,7 @@ public class TestController {
      * @param user
      * @return
      */
-    @PostMapping("/test1")
+    @PostMapping("/admin/test1")
     @ApiOperationLog(description = "测试接口")
     @ApiOperation(value = "测试接口-全局异常处理器：参数校验")
     public Response test1(@RequestBody @Valid User user) {
