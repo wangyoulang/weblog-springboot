@@ -34,10 +34,11 @@ class WeblogWebApplicationTests {
     @Test
     public void insertTest() {
         UserDO userDO = UserDO.builder()
-                .username("wang")
-                .password("123456")
+                .username("qiang")
+                .password("1234567")
                 .createTime(new Date())
                 .updateTime(new Date())
+                .isDeleted(false)
                 .build();
         userMapper.insert(userDO);
     }
