@@ -2,3 +2,13 @@ spring:
   profiles:
     # 默认激活 dev 环境
     active: dev
+
+
+jwt:
+  # 签发人
+  issuer: wangyoulang
+  # 秘钥
+#  secret: jElxcSUj38+Bnh73T68lNs0DfBSit6U3whQlcGO2XwnI+Bo3g4xsiCIPg8PV/L0fQMis08iupNwhe2PzYLB9Xg==
+  secret: 2Ek9xPIV56iGhS/m+OiEFAkhLPyCKLXkO0pKJMwW47YMTt8O0zo9BduQ2wyJsFpCzhQqAj2qBJAW1Nqimg10kA==
+server:
+  port: 8090
