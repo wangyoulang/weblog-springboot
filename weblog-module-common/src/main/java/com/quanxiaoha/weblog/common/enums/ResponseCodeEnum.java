@@ -18,7 +18,9 @@ public enum ResponseCodeEnum implements BaseExceptionInterface {
 
     LOGIN_FAIL("20000", "登录失败"),
 
-    USER_OR_PASSWORD_ERROR("20002", "用户名或密码错误");
+    USER_OR_PASSWORD_ERROR("20002", "用户名或密码错误"),
+
+    UNAUTHORIZED("20002", "无访问权限，请先登录！");
 
     private String errorCode;
     private String errorMessage;
