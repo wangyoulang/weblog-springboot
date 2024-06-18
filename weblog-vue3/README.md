@@ -94,4 +94,9 @@ npm install @element-plus/icons-vue
  在Animate官网挑选合适的动画效果
  https://animate.style/
 
- 
+ ## 安装 Axios
+ ```sh
+ npm install axios
+ ```
+
+ Axios 是一个流行的用于发起 HTTP 请求的 JavaScript 库。它可以在浏览器和 Node.js 环境中使用，提供了一种简洁且强大的方式来处理异步网络请求。在项目中整合 Axios 可以帮助你轻松地与后端服务器进行数据交互。
