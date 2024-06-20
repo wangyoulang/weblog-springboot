@@ -1,7 +1,7 @@
 import Index from '@/pages/frontend/index.vue'
 import Login from '@/pages/admin/login.vue'
-import AdminIndex from '@/pages/admin/index.vue'
 import { createRouter, createWebHashHistory } from 'vue-router'
+import AdminIndex from '@/pages/admin/index.vue'
 
 // 统一在这里声明所有路由
 const routes = [
@@ -20,7 +20,7 @@ const routes = [
         }
     },
     {
-        path: "/admin/index", // 后台首页
+        path: '/admin/index', // 后台首页
         component: AdminIndex,
         meta: {
             title: 'Admin 后台首页'
