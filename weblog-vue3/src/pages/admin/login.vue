@@ -52,6 +52,8 @@ import { login } from '@/api/admin/user'
 import { useRouter } from 'vue-router'
 import { ref, reactive, onMounted, onBeforeUnmount } from 'vue'
 import { showMessage } from '@/composables/util'
+import { setToken } from '@/composables/auth'
+
 
 // 定义响应式的表单对象
 const form = reactive({
@@ -83,7 +85,7 @@ const rules = {
 }
 
 // 按回车键后，执行登录事件
-function okKeyUp(e) {
+function onKeyUp(e) {
     console.log(e)
     if (e.key == 'Enter') {
         onSubmit()
@@ -91,15 +93,19 @@ function okKeyUp(e) {
 }
 
 // 添加键盘监听
-onMounted(() =>{
-    console.log("添加键盘监听")
-    document.addEventListener("keyup", okKeyUp)
+onMounted(() => {
+    console.log('添加键盘监听')
+    document.addEventListener('keyup', onKeyUp)
 })
 
 // 移除键盘监听
 onBeforeUnmount(() => {
     document.removeEventListener('keyup', onKeyUp)
 })
+
+
+// 登录按钮加载
+const loading = ref(false)
 
 // 登录
 const onSubmit = () => {
@@ -111,13 +117,16 @@ const onSubmit = () => {
             return false
         }
 
+        // 开始加载
+        loading.value = true
         login(form.username, form.password).then((res) => {
-            // 开始加载
-            loading.value = true
             console.log(res)
             // 判断是否成功
             if (res.data.success == true) {
                 showMessage("登陆成功")
+                // 存储 Token 到 Cookie 中
+                let token = res.data.data.token
+                setToken(token)
                 // 跳转到后台首页
                 router.push('/admin/index')
             } else {

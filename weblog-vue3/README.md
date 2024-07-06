@@ -100,3 +100,16 @@ npm install @element-plus/icons-vue
  ```
 
  Axios 是一个流行的用于发起 HTTP 请求的 JavaScript 库。它可以在浏览器和 Node.js 环境中使用，提供了一种简洁且强大的方式来处理异步网络请求。在项目中整合 Axios 可以帮助你轻松地与后端服务器进行数据交互。
+
+
+ ## 把token存储到cookie里面
+VueUse 是一个用于 Vue.js 应用程序的工具库， VueUse 提供了一些常见功能的封装，其中就有对 Cookie 操作的相关封装，VueUse的官方访问地址为：https://vueuse.org/
+
+ ```sh
+
+# useCookies 依赖 integrations，需要先安装它
+npm i @vueuse/integrations
+# 安装 useCookies
+npm i universal-cookie
+ ```
+
